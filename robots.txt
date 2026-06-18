@@ -1,0 +1,13 @@
+# Jivani Gems — robots.txt
+User-agent: *
+Allow: /
+
+# Don't index transactional/account pages
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /account.html
+Disallow: /order-success.html
+Disallow: /login.html
+
+# CUSTOMIZE: replace with your real production domain
+Sitemap: https://jivanigems.netlify.app/sitemap.xml

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Custom Order — Bespoke Lab-Grown Diamonds | Jivani Gems</title>
+  <meta name="description" content="Commission a one-of-a-kind lab-grown diamond piece. Tell us the type, carat, metal, diamond shape and your vision — we'll quote within 3 business days.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/custom-order">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Custom Order — Jivani Gems">
+  <meta property="og:description" content="Commission a one-of-a-kind lab-grown diamond piece, made to your vision.">
+  <meta property="og:image" content="https://jivanigems.netlify.app/assets/og-image.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .cu-wrap { max-width: 760px; margin: 0 auto; padding: 0 var(--pad) 100px; }
+    .cu-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+    .cu-file { border: 1px dashed var(--line-2); padding: 22px; text-align: center; cursor: pointer; display: block; }
+    .cu-file:hover { border-color: var(--navy); }
+    @media (max-width:680px){ .cu-2{grid-template-columns:1fr} }
+  </style>
+</head>
+<body data-page="custom">
+  <div class="jv-page-hero">
+    <span class="jv-eyebrow center">Bespoke Atelier</span>
+    <h1>Commission your <em>one of one</em>.</h1>
+    <p>Describe the piece you’ve always pictured. Our atelier will craft it in certified lab-grown diamonds and reply with a quote within 3 business days.</p>
+  </div>
+
+  <div class="cu-wrap" id="custom-stage">
+    <form id="custom-form" class="jv-card-panel" novalidate>
+      <div class="cu-2">
+        <div class="jv-field">
+          <label class="jv-label" for="cu-type">Jewelry type</label>
+          <select class="jv-select" id="cu-type">
+            <option value="ring">Ring</option><option value="earrings">Earrings</option><option value="necklace">Necklace</option>
+            <option value="choker">Choker</option><option value="pendant_set">Pendant set</option><option value="anklet">Anklet</option><option value="bracelet">Bracelet</option>
+          </select>
+        </div>
+        <div class="jv-field">
+          <label class="jv-label" for="cu-gold">Metal</label>
+          <select class="jv-select" id="cu-gold">
+            <option value="yellow_gold">Yellow gold</option><option value="rose_gold">Rose gold</option><option value="white_gold">White gold</option><option value="platinum">Platinum</option><option value="silver">Silver</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cu-2">
+        <div class="jv-field"><label class="jv-label" for="cu-carat">Total carat (approx.)</label><input class="jv-input" id="cu-carat" type="number" min="0.1" step="0.1" placeholder="e.g. 1.5"></div>
+        <div class="jv-field"><label class="jv-label" for="cu-num">Number of diamonds</label><input class="jv-input" id="cu-num" type="number" min="1" step="1" placeholder="e.g. 1"></div>
+      </div>
+
+      <div class="cu-2">
+        <div class="jv-field">
+          <label class="jv-label" for="cu-color">Diamond colour</label>
+          <select class="jv-select" id="cu-color"><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select>
+        </div>
+        <div class="jv-field">
+          <label class="jv-label" for="cu-diamond">Diamond shape</label>
+          <select class="jv-select" id="cu-diamond">
+            <option value="round brilliant">Round brilliant</option><option value="princess">Princess</option><option value="cushion">Cushion</option><option value="emerald">Emerald</option><option value="oval">Oval</option><option value="pear">Pear</option><option value="marquise">Marquise</option><option value="heart">Heart</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="jv-field">
+        <label class="jv-label" for="cu-desc">Shape / style description</label>
+        <textarea class="jv-textarea" id="cu-desc" placeholder="Describe the overall look, inspiration, who it's for, any engraving…"></textarea>
+      </div>
+
+      <div class="jv-field">
+        <label class="jv-label">Reference image <span class="muted">(optional)</span></label>
+        <label class="cu-file" for="cu-image">
+          <span style="font-size:13px;color:var(--muted)">Click to upload an inspiration image · <span id="cu-image-name">No file chosen</span></span>
+          <input id="cu-image" type="file" accept="image/*" hidden>
+        </label>
+      </div>
+
+      <div class="jv-field"><label class="jv-label" for="cu-email">Contact email</label><input class="jv-input" id="cu-email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+
+      <button class="jv-btn jv-btn-block" type="submit">Submit request</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script><script src="js/custom-order.js"></script>
+</body>
+</html>

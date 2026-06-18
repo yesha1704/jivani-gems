@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Account — Jivani Gems</title>
+  <meta name="description" content="Manage your Jivani Gems profile, shipping address, order history and member rewards.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/account">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="My Account — Jivani Gems">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .acct { max-width: 1000px; margin: 0 auto; padding: 56px var(--pad) 100px; }
+    .acct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+    .acct-section h2 { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); font-family: var(--sans); margin-bottom: 18px; }
+    .form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+    @media (max-width:760px){ .acct-grid{grid-template-columns:1fr} .form-2{grid-template-columns:1fr} }
+  </style>
+</head>
+<body data-page="account">
+  <div class="acct">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:44px">
+      <div>
+        <span class="jv-eyebrow">Members</span>
+        <h1 class="serif" style="font-size:clamp(38px,6vw,60px);margin-top:16px" id="acct-greeting">Your account</h1>
+      </div>
+      <button class="jv-btn-underline" id="logout-btn">Log out</button>
+    </div>
+
+    <!-- REWARDS / VOUCHER (reveal happens here, only after an order) -->
+    <section class="acct-section" style="margin-bottom:44px">
+      <h2>Rewards</h2>
+      <div id="voucher-box"></div>
+    </section>
+
+    <div class="acct-grid">
+      <!-- PROFILE + ADDRESS -->
+      <section class="acct-section">
+        <h2>Profile &amp; shipping address</h2>
+        <form id="profile-form" class="jv-card-panel" novalidate>
+          <div class="jv-field"><label class="jv-label" for="pf-name">Full name</label><input class="jv-input" id="pf-name" type="text"></div>
+          <div class="form-2">
+            <div class="jv-field"><label class="jv-label" for="pf-email">Email</label><input class="jv-input" id="pf-email" type="email" readonly style="background:#f4f5f7;color:var(--muted)"></div>
+            <div class="jv-field"><label class="jv-label" for="pf-phone">Phone</label><input class="jv-input" id="pf-phone" type="tel"></div>
+          </div>
+          <div class="jv-field"><label class="jv-label" for="pf-address">Address</label><input class="jv-input" id="pf-address" type="text" placeholder="House no., street, area"></div>
+          <div class="form-2">
+            <div class="jv-field"><label class="jv-label" for="pf-city">City</label><input class="jv-input" id="pf-city" type="text"></div>
+            <div class="jv-field"><label class="jv-label" for="pf-state">State</label><input class="jv-input" id="pf-state" type="text"></div>
+          </div>
+          <div class="jv-field"><label class="jv-label" for="pf-pincode">Pincode</label><input class="jv-input" id="pf-pincode" type="text" inputmode="numeric"></div>
+          <button class="jv-btn jv-btn-block" type="submit">Save changes</button>
+        </form>
+      </section>
+
+      <!-- ORDER HISTORY -->
+      <section class="acct-section">
+        <h2>Order history</h2>
+        <div id="orders-box"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>

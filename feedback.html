@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reviews &amp; Feedback — Jivani Gems</title>
+  <meta name="description" content="Read what Jivani Gems customers say about their lab-grown diamond jewelry — and share your own experience.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/feedback">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Reviews — Jivani Gems">
+  <meta property="og:description" content="Real reviews from Jivani Gems customers.">
+  <meta property="og:image" content="https://jivanigems.netlify.app/assets/og-image.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="feedback">
+  <div class="jv-page-hero">
+    <span class="jv-eyebrow center">In Their Words</span>
+    <h1>Reviews &amp; <em>feedback</em>.</h1>
+    <p>The honest experiences of those who wear Jivani Gems every day.</p>
+    <div id="fb-summary" style="margin-top:22px"></div>
+  </div>
+
+  <div class="jv-container" style="max-width:840px;padding-bottom:100px">
+    <!-- submission form -->
+    <form id="review-form" class="jv-card-panel" style="margin-bottom:48px" novalidate>
+      <h2 class="serif" style="font-size:26px;margin-bottom:18px">Share your experience</h2>
+      <div class="jv-field">
+        <label class="jv-label">Your rating</label>
+        <div class="jv-stars" id="fb-stars" style="gap:6px"></div>
+      </div>
+      <div class="jv-field"><label class="jv-label" for="fb-product">Which piece? <span class="muted">(optional)</span></label><select class="jv-select" id="fb-product"></select></div>
+      <div class="jv-field"><label class="jv-label" for="fb-text">Your review</label><textarea class="jv-textarea" id="fb-text" placeholder="Tell us about the craftsmanship, the sparkle, the service…"></textarea></div>
+      <button class="jv-btn jv-btn-block" type="submit">Post review</button>
+      <p class="muted" style="font-size:12px;margin-top:10px">You’ll need to be logged in to post. Reviews are public.</p>
+    </form>
+
+    <div id="fb-list"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script><script src="js/products.js"></script><script src="js/reviews.js"></script>
+</body>
+</html>

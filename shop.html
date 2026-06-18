@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop All — Lab-Grown Diamond Jewelry | Jivani Gems</title>
+  <meta name="description" content="Browse the full Jivani Gems collection of lab-grown diamond rings, earrings, necklaces, bracelets and loose diamonds. Filter by metal, colour, carat and price.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/shop">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shop All — Jivani Gems">
+  <meta property="og:description" content="The full collection of certified lab-grown diamond jewelry.">
+  <meta property="og:image" content="https://jivanigems.netlify.app/assets/og-image.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="shop">
+
+  <div class="jv-page-hero">
+    <span class="jv-eyebrow center">The Collection</span>
+    <h1>The full <em>atelier</em>.</h1>
+    <p>Every piece certified, every diamond grown — never mined. Filter to find your forever.</p>
+  </div>
+
+  <div class="jv-container" style="padding-bottom:100px">
+    <div class="jv-toolbar">
+      <span class="count" id="shop-count">Loading…</span>
+      <label style="display:flex;align-items:center;gap:12px">
+        <span class="count">Sort by</span>
+        <select class="jv-select" id="shop-sort" style="width:auto;min-width:200px">
+          <option value="newest">Newest first</option>
+          <option value="price-asc">Price — low to high</option>
+          <option value="price-desc">Price — high to low</option>
+          <option value="popular">Most popular</option>
+          <option value="quality">Diamond quality</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="jv-split">
+      <aside class="jv-filters" id="shop-filters"><!-- built by shop.js --></aside>
+      <div id="shop-grid" class="jv-grid cols-3"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script><script src="js/products.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

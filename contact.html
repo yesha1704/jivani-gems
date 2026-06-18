@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us — Jivani Gems</title>
+  <meta name="description" content="Get in touch with the Jivani Gems atelier — book a consultation, ask about a piece, or get help with an order.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/contact">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact Us — Jivani Gems">
+  <meta property="og:description" content="Reach the Jivani Gems atelier.">
+  <meta property="og:image" content="https://jivanigems.netlify.app/assets/og-image.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .ct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad) 100px; align-items: start; }
+    .ct-detail { padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .ct-detail .k { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+    .ct-detail .v { font-family: var(--serif); font-size: 22px; margin-top: 4px; }
+    @media (max-width:880px){ .ct-grid{grid-template-columns:1fr;gap:40px} }
+  </style>
+</head>
+<body data-page="contact">
+  <div class="jv-page-hero">
+    <span class="jv-eyebrow center">We’re Here</span>
+    <h1>Let’s <em>talk</em>.</h1>
+    <p>Questions about a piece, a bespoke idea, or an existing order? Our atelier replies within one business day.</p>
+  </div>
+
+  <div class="ct-grid">
+    <!-- FORM -->
+    <form id="contact-form" class="jv-card-panel" novalidate>
+      <div class="jv-field"><label class="jv-label" for="ct-name">Name</label><input class="jv-input" id="ct-name" type="text" autocomplete="name"></div>
+      <div class="jv-field"><label class="jv-label" for="ct-email">Email</label><input class="jv-input" id="ct-email" type="email" autocomplete="email"></div>
+      <div class="jv-field"><label class="jv-label" for="ct-subject">Subject</label><input class="jv-input" id="ct-subject" type="text"></div>
+      <div class="jv-field"><label class="jv-label" for="ct-message">Message</label><textarea class="jv-textarea" id="ct-message" placeholder="How can we help?"></textarea></div>
+      <button class="jv-btn jv-btn-block" type="submit">Send message</button>
+    </form>
+
+    <!-- DETAILS -->
+    <div>
+      <div class="ct-detail"><div class="k">Email</div><div class="v" id="ct-email-line">hello@jivanigems.com</div></div>
+      <div class="ct-detail"><div class="k">Phone</div><div class="v" id="ct-phone-line">+91 00000 00000</div></div>
+      <div class="ct-detail"><div class="k">Atelier</div><div class="v">By appointment</div><p class="muted" style="margin-top:6px">Mon – Sat · 11am – 7pm</p></div>
+      <div class="ct-detail" style="border-bottom:0">
+        <div class="k">Follow</div>
+        <div class="jv-social" style="margin-top:12px">
+          <a href="#" aria-label="Instagram" style="border-color:var(--line-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F1B3D" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="#0F1B3D"/></svg></a>
+          <a href="#" aria-label="Facebook" style="border-color:var(--line-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0F1B3D"><path d="M13 22v-8h2.5l.5-3H13V9c0-.9.3-1.5 1.6-1.5H16V5s-1-.2-2-.2c-2 0-3.4 1.2-3.4 3.5V11H8v3h2.6v8z"/></svg></a>
+          <a href="#" aria-label="Pinterest" style="border-color:var(--line-2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0F1B3D"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.1-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.6 2.2-.9 3.4-.2 1 .5 1.8 1.5 1.8 1.8 0 3-2.3 3-5 0-2-1.4-3.5-3.9-3.5a4.4 4.4 0 0 0-4.6 4.4c0 .9.3 1.5.7 2 .2.2.2.3.1.5l-.2.9c-.1.3-.3.4-.6.2-1.2-.5-1.8-1.9-1.8-3.5 0-2.6 2.2-5.7 6.5-5.7 3.5 0 5.8 2.5 5.8 5.2 0 3.6-2 6.3-4.9 6.3-1 0-1.9-.5-2.2-1.1l-.6 2.4c-.2.8-.7 1.7-1 2.3A10 10 0 1 0 12 2z"/></svg></a>
+        </div>
+      </div>
+      <!-- Static map placeholder (CUSTOMIZE: embed Google Maps iframe with your location) -->
+      <div style="margin-top:24px;aspect-ratio:16/9;background:linear-gradient(170deg,#EEF1F6,#E2E7EF);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;letter-spacing:.2em;text-transform:uppercase">Map — embed your location</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // reflect configured contact details
+      JV.qs('#ct-email-line').textContent = JIVANI_CONFIG.CONTACT_EMAIL || 'hello@jivanigems.com';
+      JV.qs('#ct-phone-line').textContent = JIVANI_CONFIG.CONTACT_PHONE || '+91 00000 00000';
+
+      let last = 0;
+      JV.qs('#contact-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (Date.now() - last < 5000) return JV.toast('Please wait before sending again.', 'info'); // anti-spam debounce
+        const name = JV.qs('#ct-name').value.trim(), email = JV.qs('#ct-email').value.trim(), message = JV.qs('#ct-message').value.trim();
+        if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || message.length < 5) return JV.toast('Please complete all fields with a valid email.', 'error');
+        last = Date.now();
+        const btn = e.target.querySelector('button'); btn.disabled = true; btn.textContent = 'Sending…';
+        try {
+          if (!window.JV_DEMO_MODE) {
+            await fetch('/.netlify/functions/send-email', { method:'POST', headers:{'Content-Type':'application/json'},
+              body: JSON.stringify({ type:'contact', name, email, subject: JV.qs('#ct-subject').value.trim(), message }) });
+          } else { await new Promise(r=>setTimeout(r,500)); }
+          e.target.reset();
+          JV.toast('Thank you — we’ll be in touch within one business day.', 'success', 5000);
+        } catch { JV.toast('Could not send right now. Please email us directly.', 'error'); }
+        finally { btn.disabled = false; btn.textContent = 'Send message'; }
+      });
+    });
+  </script>
+</body>
+</html>

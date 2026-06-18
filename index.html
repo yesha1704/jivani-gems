@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ============ SEO / METADATA (unique per page) ============ -->
+  <title>Jivani Gems — Lab-Grown Diamond Jewelry, Certified &amp; Eternal</title>
+  <meta name="description" content="Jivani Gems crafts certified lab-grown diamond jewelry — engagement rings, earrings, necklaces and bespoke pieces in recycled gold. Brilliance, reimagined in the laboratory.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jivani Gems — Lab-Grown Diamond Jewelry">
+  <meta property="og:description" content="Certified lab-grown diamonds, cut by master artisans, set in recycled gold. Created with intention — worn for generations.">
+  <meta property="og:image" content="https://jivanigems.netlify.app/assets/og-image.jpg"><!-- CUSTOMIZE -->
+  <meta property="og:url" content="https://jivanigems.netlify.app/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon (inline diamond mark) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+
+  <!-- Fonts: Cormorant Garamond (display serif) + Manrope (sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Homepage-only styles (bespoke sections live here so the shared sheet stays lean) -->
+  <style>
+    .home-caption { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad) 80px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
+    .home-caption .cap-stats { display: flex; align-items: flex-end; gap: 44px; flex-wrap: wrap; }
+    .stat-group { display: flex; gap: 32px; padding-right: 8px; border-right: 1px solid var(--line); }
+    .stat .n { font-family: var(--serif); font-size: 22px; line-height: 1; color: var(--ink); }
+    .stat .l { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+    .collection-card { background: var(--bg); border: 1px solid var(--line); transition: box-shadow var(--t), border-color var(--t); }
+    .collection-card:hover { box-shadow: 0 20px 50px -32px rgba(15,27,61,.4); border-color: var(--line-2); }
+    .collection-art { aspect-ratio: 3/4; position: relative; display: flex; align-items: flex-end; padding: 28px; overflow: hidden; }
+    .collection-art .num { position: absolute; top: 24px; left: 28px; font-family: var(--serif); font-size: 18px; letter-spacing: .1em; }
+    .collection-art .ct  { position: absolute; top: 24px; right: 28px; font-size: 9px; letter-spacing: .32em; text-transform: uppercase; opacity: .7; }
+    .collection-art .whisper { font-family: var(--serif); font-style: italic; font-size: 18px; position: relative; z-index: 2; }
+    .collection-body { padding: 30px 32px 34px; display: flex; justify-content: space-between; align-items: center; }
+    .collection-body h3 { font-size: 28px; font-weight: 500; letter-spacing: -.01em; }
+    .collection-body .arrow { width: 40px; height: 40px; border: 1px solid var(--line-2); display: flex; align-items: center; justify-content: center; }
+
+    .pillars { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(168,180,206,.3); }
+    .pillar { padding: 48px 32px; border-right: 1px solid rgba(168,180,206,.3); }
+    .pillar:last-child { border-right: 0; }
+    .pillar .pn { font-family: var(--serif); font-size: 40px; color: var(--ink); }
+    .pillar h4 { font-family: var(--sans); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; margin: 18px 0 12px; }
+    .pillar p { font-size: 14px; color: var(--body); line-height: 1.7; }
+
+    .why-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 90px; align-items: end; margin-bottom: 80px; }
+
+    .testi { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: flex-start; }
+    .testi-quote { font-family: var(--serif); font-size: 30px; line-height: 1.35; color: var(--ink); }
+    .testi-sub { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 36px; }
+    .testi-card { border: 1px solid var(--line); padding: 28px; background: #fff; }
+    .testi-card p { font-size: 14px; color: var(--body); line-height: 1.7; }
+
+    @media (max-width: 880px) {
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .pillar { border-bottom: 1px solid rgba(168,180,206,.3); }
+      .why-head, .testi { grid-template-columns: 1fr; gap: 32px; }
+      .testi-sub { grid-template-columns: 1fr; }
+      .stat-group { border-right: 0; }
+    }
+  </style>
+</head>
+
+<body data-page="home">
+
+  <!-- ====================== HERO: 360° viewer ====================== -->
+  <section class="jv-hero" aria-label="Featured piece — 360 degree view">
+    <div class="jv-hero-viewer">
+      <div class="jv-hero-guides"><span style="left:16.66%"></span><span style="left:50%"></span><span style="right:16.66%"></span></div>
+
+      <div class="jv-hero-badge"><span class="dot"></span>360° View · Live</div>
+      <div class="jv-hero-tools">
+        <button title="Fullscreen" aria-label="Fullscreen"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F1B3D" stroke-width="1.6"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke-linecap="square"/></svg></button>
+        <button title="Zoom" aria-label="Zoom"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0F1B3D" stroke-width="1.6"><circle cx="11" cy="11" r="6.5"/><line x1="19.5" y1="19.5" x2="16" y2="16" stroke-linecap="round"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg></button>
+      </div>
+
+      <div class="jv-hero-stage"><div class="jv-hero-spin"></div></div>
+
+      <div class="jv-hero-foot">
+        <div class="jv-hero-foot-row">
+          <span data-hero-frame>Frame 1 / 36</span>
+          <span class="hint"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" stroke-linecap="round"/><path d="M3 3v5h5" stroke-linecap="round" stroke-linejoin="round"/></svg> Drag to rotate</span>
+          <span>1.20 ct · Round</span>
+        </div>
+        <div class="jv-hero-track"><div class="jv-hero-fill"></div><div class="jv-hero-knob"></div></div>
+      </div>
+
+      <span class="jv-corner tl"></span><span class="jv-corner tr"></span><span class="jv-corner bl"></span><span class="jv-corner br"></span>
+    </div>
+
+    <div class="jv-hero-text">
+      <span class="jv-eyebrow center">The Aria Collection · MMXXVI</span>
+      <h1 class="jv-hero-h1">Brilliance, <em>reimagined</em><br>in the laboratory.</h1>
+      <p>Pure carbon, cut by master artisans, set in 100% recycled 18k gold. Created with intention — worn for generations.</p>
+      <div class="jv-hero-buttons">
+        <a class="jv-btn" href="shop.html">Explore Collection <span aria-hidden="true">→</span></a>
+        <a class="jv-btn-underline" href="custom-order.html">Customize</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- featured caption with certification stats -->
+  <div class="home-caption">
+    <div>
+      <div style="font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Featured · Style No. AR-014</div>
+      <div class="serif" style="font-size:24px;font-weight:500">The Aria Solitaire — 1.20ct round, 18k recycled gold</div>
+    </div>
+    <div class="cap-stats">
+      <div class="stat-group">
+        <div class="stat"><div class="n">D–F</div><div class="l">Colorless</div></div>
+        <div class="stat"><div class="n">VS1+</div><div class="l">Clarity</div></div>
+        <div class="stat"><div class="n">IGI</div><div class="l">Certified</div></div>
+      </div>
+      <a class="jv-link-underline" href="shop.html?category=rings">View Details →</a>
+    </div>
+  </div>
+
+  <div class="jv-rule"><span class="jv-rule-line"></span><span class="jv-rule-mark"></span><span class="jv-rule-line"></span></div>
+
+  <!-- ====================== FEATURED COLLECTIONS ====================== -->
+  <section class="jv-section">
+    <div class="jv-container">
+      <div class="jv-section-head">
+        <div>
+          <span class="jv-eyebrow">01 · The Houses</span>
+          <h2 class="jv-section-title" style="margin-top:22px">Three houses, one <em>unmistakable</em> standard.</h2>
+        </div>
+        <a class="jv-link-underline" href="shop.html">All Collections →</a>
+      </div>
+
+      <div class="jv-grid cols-3">
+        <a class="collection-card" href="shop.html?category=rings">
+          <div class="collection-art" style="background:linear-gradient(170deg,#F2EADB,#E8DEC8)">
+            <span class="num">N° 01</span><span class="ct">14 styles</span>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="-100 -100 200 200" width="52%"><ellipse cx="0" cy="50" rx="44" ry="3" fill="#0F1B3D" opacity="0.12"/><path d="M -50 22 a 50 14 0 0 0 100 0" fill="none" stroke="#8a7449" stroke-width="3.2"/><path d="M -50 22 a 50 14 0 0 1 100 0" fill="none" stroke="#c5ad7a" stroke-width="3.6"/><polygon points="-22,-12 0,-46 22,-12 0,8" fill="#FAFAF7" stroke="#0F1B3D" stroke-width="0.7"/><polygon points="22,-12 10,-20 0,-46" fill="#b8bdc9"/><polygon points="-10,-20 0,-46 10,-20 0,-28" fill="#FAFAF7" opacity="0.85"/></svg>
+            </div>
+            <div class="whisper">For the proposal</div>
+          </div>
+          <div class="collection-body"><h3>Engagement</h3><span class="arrow">→</span></div>
+        </a>
+
+        <a class="collection-card" href="shop.html?category=necklace">
+          <div class="collection-art" style="background:linear-gradient(170deg,#EEF1F6,#E2E7EF)">
+            <span class="num">N° 02</span><span class="ct">9 styles</span>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="-100 -100 200 200" width="58%"><path d="M -60 -30 a 60 70 0 0 0 120 0" fill="none" stroke="#9da7bd" stroke-width="2"/><polygon points="-12,18 0,-2 12,18 0,34" fill="#FAFAF7" stroke="#0F1B3D" stroke-width="0.7"/><polygon points="12,18 6,10 0,-2" fill="#b8bdc9"/></svg>
+            </div>
+            <div class="whisper">For the everyday</div>
+          </div>
+          <div class="collection-body"><h3>Necklaces</h3><span class="arrow">→</span></div>
+        </a>
+
+        <a class="collection-card" href="shop.html?category=earrings">
+          <div class="collection-art" style="background:linear-gradient(170deg,#F3EFEA,#E7E0D8)">
+            <span class="num">N° 03</span><span class="ct">11 styles</span>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="-100 -100 200 200" width="52%"><polygon points="-34,-6 -22,-26 -10,-6 -22,12" fill="#FAFAF7" stroke="#0F1B3D" stroke-width="0.7"/><polygon points="34,-6 22,-26 10,-6 22,12" fill="#FAFAF7" stroke="#0F1B3D" stroke-width="0.7"/><polygon points="-22,-26 -10,-6 -22,12" fill="#b8bdc9"/><polygon points="22,-26 10,-6 22,12" fill="#cdd5e3"/></svg>
+            </div>
+            <div class="whisper">For the light</div>
+          </div>
+          <div class="collection-body"><h3>Earrings</h3><span class="arrow">→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="jv-rule"><span class="jv-rule-line"></span><span class="jv-rule-mark"></span><span class="jv-rule-line"></span></div>
+
+  <!-- ====================== FEATURED PRODUCTS ====================== -->
+  <section class="jv-section">
+    <div class="jv-container">
+      <div class="jv-section-head">
+        <div>
+          <span class="jv-eyebrow">02 · The Latest</span>
+          <h2 class="jv-section-title" style="margin-top:22px">Newly <em>acquired</em>.</h2>
+        </div>
+        <a class="jv-link-underline" href="new-arrivals.html">All New Arrivals →</a>
+      </div>
+      <div id="home-products" class="jv-grid cols-4"></div>
+    </div>
+  </section>
+
+  <!-- ====================== VOUCHER TEASER ====================== -->
+  <!-- Never reveals the amount; the 50% is only revealed on the account page
+       AFTER an order is confirmed (see js/account.js). -->
+  <section style="padding:0 var(--pad)">
+    <div class="jv-voucher-teaser jv-container" style="max-width:var(--maxw)">
+      <span class="spark">✦</span> A special reward awaits after your first order. <span class="spark">✦</span>
+    </div>
+  </section>
+
+  <!-- ====================== WHY LAB-GROWN ====================== -->
+  <section class="jv-section" id="why">
+    <div class="jv-container">
+      <div class="why-head">
+        <div><span class="jv-eyebrow">03 · The Difference</span></div>
+        <h2 class="jv-section-title">Chemically identical. <em>Ethically</em> superior.</h2>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="pn">01</div><h4>Identical to mined</h4><p>Same carbon crystal, same fire, same hardness. Indistinguishable to the eye — and to the gemologist.</p></div>
+        <div class="pillar"><div class="pn">02</div><h4>IGI &amp; GIA certified</h4><p>Every stone over 0.30ct ships with an independent laboratory certificate of the 4Cs.</p></div>
+        <div class="pillar"><div class="pn">03</div><h4>Kinder by origin</h4><p>No mining, a fraction of the carbon, set in 100% recycled precious metal.</p></div>
+        <div class="pillar"><div class="pn">04</div><h4>Honest value</h4><p>The same brilliance for a fraction of the price — so you can choose the larger, finer stone.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="jv-rule"><span class="jv-rule-line"></span><span class="jv-rule-mark"></span><span class="jv-rule-line"></span></div>
+
+  <!-- ====================== TESTIMONIALS ====================== -->
+  <section class="jv-section">
+    <div class="jv-container">
+      <div class="testi">
+        <div>
+          <span class="jv-eyebrow">04 · In Their Words</span>
+          <a class="jv-link-underline" href="feedback.html" style="display:inline-block;margin-top:28px">Read all reviews →</a>
+        </div>
+        <div>
+          <p class="testi-quote">“The Aria solitaire is even more beautiful in person. The certification gave me total peace of mind — and the price let me choose a larger stone.”</p>
+          <div style="font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:20px">Priya M. · Verified buyer</div>
+          <div class="testi-sub">
+            <div class="testi-card"><div class="jv-stars" style="margin-bottom:10px"></div><p>“Wear my Celeste studs every single day. Impossible to tell they’re lab-grown.”</p><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:14px">Ananya R.</div></div>
+            <div class="testi-card"><div class="jv-stars" style="margin-bottom:10px"></div><p>“Custom band for our anniversary. The team walked me through every step.”</p><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:14px">Karan S.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== NEWSLETTER ====================== -->
+  <section class="jv-section" style="text-align:center">
+    <div class="jv-container" style="max-width:1100px">
+      <span class="jv-eyebrow center">Le Salon</span>
+      <h2 class="jv-section-title" style="margin:26px auto 24px;text-align:center">Receive new releases &amp; the<br><em>occasional thoughtful note.</em></h2>
+      <p style="color:var(--body);max-width:480px;margin:0 auto 40px">Quarterly drops, atelier dispatches, and an early preview before each collection opens to the public.</p>
+      <form class="jv-inline-form" id="newsletter-form" novalidate>
+        <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
+        <button type="submit">Subscribe <span aria-hidden="true">→</span></button>
+      </form>
+      <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:24px">No spam · Unsubscribe in one click</div>
+    </div>
+  </section>
+
+  <!-- ====================== SCRIPTS ====================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/hero360.js"></script>
+  <script>
+    // Homepage init: render the latest products + wire the newsletter + stars.
+    document.addEventListener('DOMContentLoaded', async () => {
+      const grid = document.getElementById('home-products');
+      JVProducts.skeleton(grid, 4, 4);
+      try {
+        const all = await JVProducts.fetchAll();
+        const latest = [...all].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4);
+        JVProducts.renderGrid(grid, latest, 4);
+      } catch (e) { grid.innerHTML = '<p class="muted center" style="grid-column:1/-1">Could not load pieces right now.</p>'; }
+
+      // fill the 5-star marks in testimonials
+      const star = (on) => `<svg viewBox="0 0 24 24" class="${on ? 'jv-star-on' : 'jv-star-off'}"><path d="M12 2l3 6.5 7 .8-5 4.8 1.3 7L12 17.8 5.4 21l1.3-7-5-4.8 7-.8z" stroke-width="1"/></svg>`;
+      JV.qsa('.jv-stars').forEach(s => s.innerHTML = Array.from({length:5}).map(()=>star(true)).join(''));
+
+      // newsletter (debounced to deter spam — see also Netlify Forms in the guide)
+      const nf = document.getElementById('newsletter-form');
+      let busy = false;
+      nf.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (busy) return; busy = true; setTimeout(() => busy = false, 4000);
+        const email = nf.email.value.trim();
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { JV.toast('Please enter a valid email.', 'error'); busy = false; return; }
+        JV.toast('Thank you — you’re on the list.', 'success');
+        nf.reset();
+      });
+    });
+  </script>
+</body>
+</html>

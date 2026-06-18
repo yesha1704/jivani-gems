@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart — Jivani Gems</title>
+  <meta name="description" content="Review the pieces in your Jivani Gems cart and proceed to secure checkout.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/cart">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Your Cart — Jivani Gems">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="cart">
+  <div class="jv-container" style="padding:48px var(--pad) 100px">
+    <span class="jv-eyebrow">Your selection</span>
+    <h1 class="serif" style="font-size:clamp(36px,5vw,56px);margin:16px 0 36px">The cart.</h1>
+
+    <div id="cart-stage" class="jv-split cart">
+      <div id="cart-items"></div>
+      <aside class="jv-summary" id="cart-summary"></aside>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script>
+  <script>
+    function variantLabel(s) {
+      return [s?.metal && JV.metalLabel(s.metal), s?.color && ('Colour ' + s.color), s?.size && ('Size ' + s.size)].filter(Boolean).join(' · ');
+    }
+    function render() {
+      const items = JVCart.all();
+      const itemsEl = document.getElementById('cart-items');
+      const sumEl = document.getElementById('cart-summary');
+
+      if (!items.length) {
+        document.getElementById('cart-stage').innerHTML =
+          `<div class="jv-empty" style="grid-column:1/-1"><div class="mark"></div><h3>Your cart is empty</h3><p>Pieces you add will gather here, ready when you are.</p><a class="jv-btn jv-btn-sm" href="shop.html">Explore the collection</a></div>`;
+        return;
+      }
+
+      itemsEl.innerHTML = items.map(i => {
+        const k = JVCart.key(i), s = i.snapshot || {};
+        return `<div class="jv-cart-item" data-k="${k}">
+          <img src="${s.image || ''}" alt="${s.name || ''}">
+          <div>
+            <div style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)">${JV.catLabel(s.category)}</div>
+            <a class="serif" style="font-size:22px;display:block" href="product.html?id=${encodeURIComponent(i.product_id)}">${s.name || 'Piece'}</a>
+            <div class="muted" style="font-size:13px;margin:4px 0 10px">${variantLabel(s)}</div>
+            <div class="jv-qty">
+              <button data-act="dec" aria-label="Decrease">−</button><span>${i.qty}</span><button data-act="inc" aria-label="Increase">+</button>
+            </div>
+            <button class="jv-link-underline" data-act="remove" style="border:0;border-bottom:1px solid var(--navy);background:none;margin-left:18px;padding:4px 0">Remove</button>
+          </div>
+          <div class="line-total serif" style="font-size:20px;white-space:nowrap">${JV.money((s.price || 0) * i.qty)}</div>
+        </div>`;
+      }).join('');
+
+      const t = JVCart.totals();
+      sumEl.innerHTML = `
+        <h3 class="serif" style="font-size:24px;margin-bottom:18px">Summary</h3>
+        <div class="jv-summary-row"><span>Subtotal</span><span>${JV.money(t.subtotal)}</span></div>
+        <div class="jv-summary-row"><span>${(window.JIVANI_CONFIG.TAX_LABEL)||'Tax'}</span><span>${JV.money(t.tax)}</span></div>
+        <div class="jv-summary-row"><span>Shipping</span><span>${t.shipping ? JV.money(t.shipping) : 'Complimentary'}</span></div>
+        <div class="jv-summary-row total"><span>Total</span><span>${JV.money(t.total)}</span></div>
+        <a class="jv-btn jv-btn-block" href="checkout.html" style="margin-top:18px">Proceed to Checkout</a>
+        <p class="muted center" style="font-size:12px;margin-top:14px">Taxes shown at ${(window.JIVANI_CONFIG.TAX_LABEL)||'standard rate'}. Apply a voucher at checkout.</p>`;
+    }
+
+    document.getElementById('cart-items')?.addEventListener('click', (e) => {
+      const row = e.target.closest('.jv-cart-item'); if (!row) return;
+      const k = row.dataset.k, act = e.target.dataset.act;
+      const item = JVCart.all().find(i => JVCart.key(i) === k); if (!item) return;
+      if (act === 'inc') JVCart.setQty(k, item.qty + 1);
+      if (act === 'dec') JVCart.setQty(k, item.qty - 1);
+      if (act === 'remove') { JVCart.remove(k); JV.toast('Removed from cart.', 'info'); }
+    });
+
+    document.addEventListener('jv:cart-changed', render);
+    document.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>

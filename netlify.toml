@@ -1,0 +1,90 @@
+# =============================================================================
+#  Netlify configuration for Jivani Gems
+# =============================================================================
+
+[build]
+  # Static site — nothing to compile. Netlify just publishes the repo root.
+  publish = "."
+  functions = "netlify/functions"
+  command = "npm run build"
+
+[functions]
+  # Use esbuild so our functions can `import { Resend } ...` etc.
+  node_bundler = "esbuild"
+
+[dev]
+  # `netlify dev` serves the static files AND the functions on one port (8888).
+  port = 8888
+  publish = "."
+
+# ---- Pretty URLs: allow /shop instead of /shop.html ----------------------
+# Each clean path serves its .html file (200 = rewrite, not redirect, so the
+# URL stays clean). This keeps the site "sitemap-ready" with clean URLs.
+[[redirects]]
+  from = "/shop"
+  to = "/shop.html"
+  status = 200
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+[[redirects]]
+  from = "/new-arrivals"
+  to = "/new-arrivals.html"
+  status = 200
+[[redirects]]
+  from = "/cart"
+  to = "/cart.html"
+  status = 200
+[[redirects]]
+  from = "/wishlist"
+  to = "/wishlist.html"
+  status = 200
+[[redirects]]
+  from = "/custom-order"
+  to = "/custom-order.html"
+  status = 200
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+[[redirects]]
+  from = "/feedback"
+  to = "/feedback.html"
+  status = 200
+[[redirects]]
+  from = "/product"
+  to = "/product.html"
+  status = 200
+[[redirects]]
+  from = "/account"
+  to = "/account.html"
+  status = 200
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+[[redirects]]
+  from = "/checkout"
+  to = "/checkout.html"
+  status = 200
+[[redirects]]
+  from = "/order-success"
+  to = "/order-success.html"
+  status = 200
+
+# ---- Custom 404 ----------------------------------------------------------
+# Any unknown path falls through to the on-brand 404 page.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# ---- Security headers ----------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign In or Register — Jivani Gems</title>
+  <meta name="description" content="Sign in to your Jivani Gems account to track orders, save your wishlist, and unlock member rewards.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/login">
+  <meta name="robots" content="noindex"><!-- transactional page -->
+  <meta property="og:title" content="Sign In — Jivani Gems">
+  <meta property="og:description" content="Access your Jivani Gems account.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .auth-wrap { max-width: 460px; margin: 60px auto 100px; padding: 0 22px; }
+    .auth-tabs { display: flex; border: 1px solid var(--line-2); margin-bottom: 32px; }
+    .auth-tabs button { flex: 1; background: none; border: 0; padding: 16px; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+    .auth-tabs button.active { background: var(--navy); color: var(--bg); }
+    .auth-form { display: none; } .auth-form.active { display: block; }
+  </style>
+</head>
+<body data-page="login">
+  <div class="auth-wrap">
+    <div class="center" style="margin-bottom:34px">
+      <span class="jv-eyebrow center">Members</span>
+      <h1 class="serif" style="font-size:44px;margin-top:18px" id="auth-title">Welcome back</h1>
+    </div>
+
+    <div class="jv-card-panel">
+      <div class="auth-tabs">
+        <button data-tab="login" class="active">Sign In</button>
+        <button data-tab="register">Create Account</button>
+      </div>
+
+      <!-- LOGIN -->
+      <form class="auth-form active" id="form-login" novalidate>
+        <div class="jv-field"><label class="jv-label" for="li-email">Email</label><input class="jv-input" id="li-email" type="email" autocomplete="email" required></div>
+        <div class="jv-field"><label class="jv-label" for="li-pass">Password</label><input class="jv-input" id="li-pass" type="password" autocomplete="current-password" required></div>
+        <button class="jv-btn jv-btn-block" type="submit">Sign In</button>
+      </form>
+
+      <!-- REGISTER -->
+      <form class="auth-form" id="form-register" novalidate>
+        <div class="jv-field"><label class="jv-label" for="re-name">Full name</label><input class="jv-input" id="re-name" type="text" autocomplete="name" required></div>
+        <div class="jv-field"><label class="jv-label" for="re-email">Email</label><input class="jv-input" id="re-email" type="email" autocomplete="email" required></div>
+        <div class="jv-field"><label class="jv-label" for="re-phone">Phone <span class="muted">(optional)</span></label><input class="jv-input" id="re-phone" type="tel" autocomplete="tel"></div>
+        <div class="jv-field"><label class="jv-label" for="re-pass">Password</label><input class="jv-input" id="re-pass" type="password" autocomplete="new-password" minlength="6" required><span class="muted" style="font-size:12px">At least 6 characters.</span></div>
+        <button class="jv-btn jv-btn-block" type="submit">Create Account</button>
+      </form>
+    </div>
+    <p class="center muted" style="font-size:13px;margin-top:22px">By continuing you agree to our Terms &amp; Privacy Policy.</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script>
+  <script>
+    const nextParam = new URLSearchParams(location.search).get('next') || 'account.html';
+    const go = () => location.href = nextParam;
+
+    // already logged in? skip the form
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (await JVAuth.currentUser()) go();
+    });
+
+    // tab switching
+    JV.qsa('.auth-tabs button').forEach(b => b.addEventListener('click', () => {
+      const tab = b.dataset.tab;
+      JV.qsa('.auth-tabs button').forEach(x => x.classList.toggle('active', x === b));
+      JV.qs('#form-login').classList.toggle('active', tab === 'login');
+      JV.qs('#form-register').classList.toggle('active', tab === 'register');
+      JV.qs('#auth-title').textContent = tab === 'login' ? 'Welcome back' : 'Create your account';
+    }));
+
+    function busy(btn, on, label) { btn.disabled = on; btn.innerHTML = on ? '<span class="jv-spinner" style="border-color:rgba(255,255,255,.4);border-top-color:#fff"></span>' : label; }
+
+    JV.qs('#form-login').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const email = JV.qs('#li-email').value.trim(), pass = JV.qs('#li-pass').value;
+      if (!email || !pass) return JV.toast('Please fill in both fields.', 'error');
+      busy(btn, true, 'Sign In');
+      const r = await JVAuth.login(email, pass);
+      busy(btn, false, 'Sign In');
+      if (r.ok) { JV.toast('Signed in.', 'success'); go(); } else JV.toast(r.message || 'Could not sign in.', 'error');
+    });
+
+    JV.qs('#form-register').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const full_name = JV.qs('#re-name').value.trim(), email = JV.qs('#re-email').value.trim(),
+            phone = JV.qs('#re-phone').value.trim(), password = JV.qs('#re-pass').value;
+      if (!full_name || !email || password.length < 6) return JV.toast('Please complete all required fields (password 6+ chars).', 'error');
+      busy(btn, true, 'Create Account');
+      const r = await JVAuth.register({ email, password, full_name, phone });
+      busy(btn, false, 'Create Account');
+      if (r.ok && r.needsConfirm) { JV.toast(r.message, 'success', 6000); }
+      else if (r.ok) { JV.toast('Account created — welcome!', 'success'); go(); }
+      else JV.toast(r.message || 'Could not create account.', 'error');
+    });
+  </script>
+</body>
+</html>

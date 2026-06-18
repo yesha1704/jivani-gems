@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title + description are upgraded per-product by product-detail.js -->
+  <title>Product — Jivani Gems</title>
+  <meta name="description" content="A certified lab-grown diamond piece from Jivani Gems.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/product">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Jivani Gems — Lab-Grown Diamond Jewelry">
+  <meta property="og:image" content="https://jivanigems.netlify.app/assets/og-image.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .pd { max-width: var(--maxw); margin: 0 auto; padding: 40px var(--pad) 80px; }
+    .pd-top { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; visibility: hidden; }
+    .pd-gallery { position: sticky; top: 150px; }
+    .pd-main-wrap { aspect-ratio: 1/1; background: linear-gradient(170deg,#F4F6FA,#E9EDF4); border: 1px solid var(--line); overflow: hidden; }
+    #pd-main { width: 100%; height: 100%; object-fit: contain; }
+    .pd-thumbs { display: flex; gap: 12px; margin-top: 14px; }
+    .pd-thumb { width: 72px; height: 72px; border: 1px solid var(--line-2); background: #fff; padding: 0; overflow: hidden; opacity: .6; }
+    .pd-thumb.on { opacity: 1; border-color: var(--navy); }
+    .pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .pd-price-row { display: flex; align-items: baseline; gap: 16px; margin: 18px 0; }
+    #pd-price { font-family: var(--serif); font-size: 36px; color: var(--ink); }
+    .pd-selector { margin-bottom: 16px; }
+    .pd-actions { display: flex; gap: 12px; margin: 26px 0; }
+    .pd-trust { display: flex; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; margin-top: 22px; font-size: 12px; color: var(--muted); }
+    .pd-trust span { display: flex; gap: 8px; align-items: center; }
+    @media (max-width: 880px) { .pd-top { grid-template-columns: 1fr; gap: 32px; } .pd-gallery { position: static; } }
+  </style>
+</head>
+<body data-page="product">
+
+  <div class="pd" id="pd-stage">
+    <div class="pd-top">
+      <!-- GALLERY -->
+      <div class="pd-gallery">
+        <div class="pd-main-wrap"><img id="pd-main" src="" alt=""></div>
+        <div class="pd-thumbs" id="pd-thumbs"></div>
+      </div>
+
+      <!-- INFO -->
+      <div>
+        <span class="jv-card-tag" id="pd-newtag" style="display:none;position:static">New Arrival</span>
+        <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin:6px 0 10px" id="pd-cat"></div>
+        <h1 class="serif" style="font-size:clamp(34px,4vw,48px);font-weight:500;letter-spacing:-.01em" id="pd-name"></h1>
+
+        <div id="pd-rating-summary" style="margin:14px 0"></div>
+
+        <div class="pd-price-row">
+          <span id="pd-price">—</span>
+          <button class="jv-link-underline" id="pd-breakdown" style="border:0;border-bottom:1px solid var(--navy);background:none">View price breakdown</button>
+        </div>
+        <p style="color:var(--body);line-height:1.75" id="pd-desc"></p>
+
+        <div style="margin:26px 0 0">
+          <div class="pd-selector"><label class="jv-label" for="pd-metal">Metal</label><select class="jv-select" id="pd-metal"></select></div>
+          <div class="pd-selector"><label class="jv-label" for="pd-color">Diamond colour</label><select class="jv-select" id="pd-color"></select></div>
+          <div class="pd-selector"><label class="jv-label" for="pd-size">Size</label><select class="jv-select" id="pd-size"></select></div>
+        </div>
+
+        <div id="pd-stock" class="muted" style="margin-top:8px"></div>
+
+        <div class="pd-actions">
+          <button class="jv-btn jv-btn-block" id="pd-add" disabled>Add to Cart</button>
+          <button class="jv-btn jv-btn-ghost" id="pd-wish" aria-label="Add to wishlist" style="flex:none;width:56px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20.5s-7.5-4.8-7.5-10.5a4.2 4.2 0 0 1 7.5-2.7 4.2 4.2 0 0 1 7.5 2.7c0 5.7-7.5 10.5-7.5 10.5z" stroke-linejoin="round"/></svg>
+        </button>
+        </div>
+
+        <!-- voucher teaser (amount never revealed here) -->
+        <div class="jv-voucher-teaser" style="justify-content:flex-start">✦ A special reward awaits after your first order.</div>
+
+        <div class="pd-trust">
+          <span>✓ IGI / GIA certified</span><span>✓ Lifetime warranty</span><span>✓ Free resizing (60 days)</span><span>✓ Complimentary shipping</span>
+        </div>
+
+        <!-- SPECS -->
+        <h2 class="serif" style="font-size:24px;margin:38px 0 14px">Specifications</h2>
+        <div class="jv-specs" id="pd-specs"></div>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <section style="margin-top:90px">
+      <span class="jv-eyebrow">Reviews</span>
+      <h2 class="jv-section-title" style="font-size:40px;margin:18px 0 20px">What buyers <em>say</em>.</h2>
+      <div id="pd-reviews"></div>
+    </section>
+
+    <!-- YOU MAY ALSO LIKE -->
+    <section style="margin-top:80px">
+      <div class="jv-section-head" style="margin-bottom:36px">
+        <h2 class="jv-section-title" style="font-size:40px">You may also <em>like</em>.</h2>
+        <a class="jv-link-underline" href="shop.html">All pieces →</a>
+      </div>
+      <div id="pd-related" class="jv-grid cols-4"></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script><script src="js/products.js"></script>
+  <script src="js/product-detail.js"></script>
+</body>
+</html>

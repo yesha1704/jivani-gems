@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Confirmed — Jivani Gems</title>
+  <meta name="description" content="Thank you — your Jivani Gems order is confirmed.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/order-success">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Order Confirmed — Jivani Gems">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="success">
+  <div class="jv-container" style="max-width:760px;padding:60px var(--pad) 100px;text-align:center">
+    <div style="width:54px;height:54px;border:1px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1B3D" stroke-width="1.4"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <span class="jv-eyebrow center">Order confirmed</span>
+    <h1 class="serif" style="font-size:clamp(38px,6vw,60px);margin:18px 0 14px">Thank you.</h1>
+    <p style="color:var(--body);max-width:520px;margin:0 auto 12px">Your order is confirmed and a confirmation email is on its way with every detail.</p>
+    <div id="os-order" style="margin:36px 0"></div>
+
+    <!-- Voucher reward, revealed only now that the order is confirmed -->
+    <div class="jv-voucher-reveal" style="max-width:480px;margin:0 auto 30px" id="os-voucher" hidden>
+      <div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)">A reward, unlocked</div>
+      <h3 class="serif" style="font-size:26px;margin:8px 0">You’ve earned a 50% off voucher!</h3>
+      <p class="muted">It’s waiting in your account for your next order. Single-use, no expiry.</p>
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="jv-btn jv-btn-sm" href="account.html">Track in your account</a>
+      <a class="jv-btn jv-btn-ghost jv-btn-sm" href="shop.html">Continue shopping</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(location.search);
+      const orderId = params.get('order');
+      const box = document.getElementById('os-order');
+      const fmt = (d) => { try { return new Date(d).toLocaleDateString(JIVANI_CONFIG.LOCALE||'en-IN',{day:'numeric',month:'long',year:'numeric'}); } catch { return d; } };
+
+      // DEMO: read the simulated order. LIVE: the verify step (and webhook) just
+      // confirmed it in the DB — fetch it to show the real details.
+      let order = null;
+      if (window.JV_DEMO_MODE && orderId) {
+        order = (JSON.parse(localStorage.getItem('jv_orders')||'[]')).find(o => o.id === orderId);
+      } else if (orderId && window.sb) {
+        try { const { data } = await window.sb.from('orders').select('*').eq('id', orderId).single(); order = data; } catch (_) {}
+      }
+
+      if (order) {
+        box.innerHTML = `
+          <div class="jv-card-panel" style="text-align:left;max-width:520px;margin:0 auto">
+            <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px">
+              <div><div class="muted" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">Order</div><div class="serif" style="font-size:20px">#${String(order.id).slice(0,10)}</div></div>
+              <div style="text-align:right"><div class="muted" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">Arrives by</div><div class="serif" style="font-size:20px">${fmt(order.expected_delivery)}</div></div>
+            </div>
+            ${order.items.map(i=>`<div style="display:flex;justify-content:space-between;padding:6px 0"><span>${i.name} × ${i.qty}</span><span>${JV.money((i.price||0)*i.qty)}</span></div>`).join('')}
+            <div class="jv-summary-row total"><span>Total paid</span><span>${JV.money(order.total)}</span></div>
+            <div class="muted" style="font-size:12px;margin-top:10px">Tracking: ${order.tracking_number}</div>
+          </div>`;
+        document.getElementById('os-voucher').hidden = false;   // reveal reward
+      } else {
+        box.innerHTML = `<p class="muted">Your confirmation and tracking details are in your account and your inbox.</p>`;
+        // In live mode the voucher is on the profile; reveal the teaser regardless.
+        document.getElementById('os-voucher').hidden = false;
+      }
+    });
+  </script>
+</body>
+</html>

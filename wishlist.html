@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Wishlist — Jivani Gems</title>
+  <meta name="description" content="The Jivani Gems pieces you've saved for later. Move them to your cart whenever you're ready.">
+  <link rel="canonical" href="https://jivanigems.netlify.app/wishlist">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Your Wishlist — Jivani Gems">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 3h14l3 6-10 12L2 9z' fill='%230F1B3D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="wishlist">
+  <div class="jv-container" style="padding:48px var(--pad) 100px">
+    <span class="jv-eyebrow">Saved for later</span>
+    <h1 class="serif" style="font-size:clamp(36px,5vw,56px);margin:16px 0 36px">The wishlist.</h1>
+    <div id="wl-stage"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script><script src="js/supabaseClient.js"></script>
+  <script src="js/data.js"></script><script src="js/ui.js"></script><script src="js/auth.js"></script>
+  <script src="js/cart.js"></script><script src="js/wishlist.js"></script>
+  <script>
+    function render() {
+      const items = JVWishlist.all();
+      const stage = document.getElementById('wl-stage');
+      if (!items.length) {
+        stage.innerHTML = `<div class="jv-empty"><div class="mark"></div><h3>No saved pieces yet</h3><p>Tap the heart on any piece to keep it here for later.</p><a class="jv-btn jv-btn-sm" href="shop.html">Browse the collection</a></div>`;
+        return;
+      }
+      stage.className = 'jv-grid cols-4';
+      stage.innerHTML = items.map(i => {
+        const k = JVWishlist.key(i), s = i.snapshot || {};
+        return `<article class="jv-product-card" data-k="${k}">
+          <div class="jv-product-media">
+            <a href="product.html?id=${encodeURIComponent(i.product_id)}"><img class="active" src="${s.image || ''}" alt="${s.name || ''}" style="opacity:1"></a>
+            <button class="jv-wish-toggle on" data-act="remove" aria-label="Remove from wishlist">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.4"><path d="M12 20.5s-7.5-4.8-7.5-10.5a4.2 4.2 0 0 1 7.5-2.7 4.2 4.2 0 0 1 7.5 2.7c0 5.7-7.5 10.5-7.5 10.5z" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <div class="jv-product-body">
+            <span class="jv-product-cat">${JV.catLabel(s.category)}</span>
+            <a class="jv-product-name" href="product.html?id=${encodeURIComponent(i.product_id)}">${s.name || 'Piece'}</a>
+            <span class="jv-product-price">From ${JV.money(s.price || 0)}</span>
+            <div class="jv-product-actions"><button class="jv-btn jv-btn-sm" data-act="move">Move to Cart</button></div>
+          </div>
+        </article>`;
+      }).join('');
+    }
+
+    document.getElementById('wl-stage').addEventListener('click', (e) => {
+      const card = e.target.closest('.jv-product-card'); if (!card) return;
+      const k = card.dataset.k, act = e.target.dataset.act;
+      if (act === 'remove') { JVWishlist.remove(k); JV.toast('Removed from wishlist.', 'info'); render(); }
+      if (act === 'move') { JVWishlist.moveToCart(k); JV.toast('Moved to cart.', 'success'); render(); }
+    });
+
+    document.addEventListener('jv:wishlist-changed', render);
+    document.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>

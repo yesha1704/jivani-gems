@@ -1,0 +1,26 @@
+# ---- Jivani Gems · gitignore ----
+
+# Dependencies
+node_modules/
+.netlify/
+
+# Secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build / logs
+dist/
+*.log
+npm-debug.log*
+
+# Local Netlify dev
+.netlify
