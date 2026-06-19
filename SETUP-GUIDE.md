@@ -218,7 +218,7 @@ After adding variables, **Deploys → Trigger deploy → Deploy site** so the fu
 Already handled by `netlify.toml`: `/shop` serves `shop.html`, unknown paths show the custom `404.html`, and `/.netlify/functions/*` routes to your functions. Nothing to do.
 
 ### 5.6 Free subdomain → custom domain
-- **Free:** **Site configuration → Change site name** → e.g. `jivanigems` → `https://jivanigems.netlify.app`.
+- **Free:** **Site configuration → Change site name** → e.g. `jivanigems` → `https://jivani-gems.netlify.app`.
 - **Custom domain (e.g. from GoDaddy/Namecheap):**
   1. **Domain management → Add a domain** → type `jivanigems.com` → **Verify** → **Add**.
   2. Netlify shows DNS targets. At your registrar's DNS settings:

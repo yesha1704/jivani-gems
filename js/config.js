@@ -51,7 +51,7 @@ window.JIVANI_CONFIG = {
   /* ---- Brand / SEO ------------------------------------------------------ */
   SITE_NAME: 'Jivani Gems',
   // CUSTOMIZE: your live URL once deployed (used for canonical + OG tags + emails)
-  SITE_URL: 'https://jivanigems.netlify.app',
+  SITE_URL: 'https://jivani-gems.netlify.app',
   CONTACT_EMAIL: 'hello@jivanigems.com',   // CUSTOMIZE
   CONTACT_PHONE: '+91 00000 00000',        // CUSTOMIZE
 

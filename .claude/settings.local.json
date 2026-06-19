@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(xargs -d '\\\\n' sed -i 's/jivanigems\\\\.netlify\\\\.app/jivani-gems.netlify.app/g')",
+      "Bash(grep -v ':0$')"
     ]
   }
 }

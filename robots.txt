@@ -10,4 +10,4 @@ Disallow: /order-success.html
 Disallow: /login.html
 
 # CUSTOMIZE: replace with your real production domain
-Sitemap: https://jivanigems.netlify.app/sitemap.xml
+Sitemap: https://jivani-gems.netlify.app/sitemap.xml
